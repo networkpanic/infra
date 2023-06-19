@@ -2,15 +2,15 @@
 
 # ssh_authorized_keys: []
 
-ubuntu:
+archlinux:
   packages:
     - hdparm
     - htop
     - ipvsadm
-    - lm-sensors
+    - lm_sensors
     - nano
-    - nfs-common
+    - nfs-utils
     - nvme-cli
     - socat
-    - python3-kubernetes
-    - python3-yaml
+    - python-kubernetes
+    - python-yaml

@@ -30,15 +30,12 @@
     - name: Packages
       block:
         - name: Packages | Install required packages
-          ansible.builtin.apt:
-            name: "{{ ubuntu.packages | default([]) }}"
+          ansible.builtin.pacman:
+            name: "{{ archlinux.packages | default([]) }}"
             state: present
             update_cache: true
-        - name: Packages | Remove leaf packages
-          ansible.builtin.apt:
-            autoremove: true
         - name: Packages | RasPi packages
-          ansible.builtin.apt:
+          ansible.builtin.pacman:
             name: ["linux-modules-extra-raspi"]
             install_recommends: false
           notify: Reboot
@@ -65,12 +62,6 @@
 
     - name: System Configuration (1)
       block:
-        - name: System Configuration (1) | Disable ufw
-          ansible.builtin.systemd:
-            service: ufw.service
-            enabled: false
-            masked: true
-            state: stopped
         - name: System Configuration (1) | Enable fstrim
           ansible.builtin.systemd:
             service: fstrim.timer
